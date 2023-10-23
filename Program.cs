@@ -4,8 +4,19 @@ namespace Sudoku
 {
     internal class Program
     {
+        public static void WinMessage()
+        {
+            Console.WriteLine("Вы победили!");
+        }
+
         static void Main()
         {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+
+            int selectedRow = -1;
+            int selectedCol = -1;
+
             #region Difficulty selector
             Console.WriteLine("Выберите сложность:");
             Console.WriteLine("1. Лёгкая");
@@ -27,11 +38,9 @@ namespace Sudoku
                 board = new Board(new HardDifficulty());
             }
 
-            int selectedRow = -1;
-            int selectedCol = -1;
-
             #endregion
 
+            board.onWin += WinMessage;
             while (true)
             {
                 Console.Clear();
@@ -61,7 +70,10 @@ namespace Sudoku
                         {
                             Console.WriteLine("Недопустимый ход. Пожалуйста, проверьте правила судоку.");
                             Console.ReadLine();
+                            continue;
                         }
+
+                        if (board.IsBoardFilled()) break;
                     }
                     else
                     {

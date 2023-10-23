@@ -10,7 +10,7 @@ namespace Sudoku.Difficulties
     {
         public EasyDifficulty()
         {
-            RemoveNumbers = 25;
+            RemoveNumbers = 1;
         }
     }
 }

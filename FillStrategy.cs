@@ -48,7 +48,8 @@ namespace Sudoku
             }
         }
 
-        void FillSmallBox(int row, int col)
+        #region Private Methods
+        private void FillSmallBox(int row, int col)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -56,14 +57,14 @@ namespace Sudoku
                 {
                     List<int> temp = new List<int>();
 
-                    for (int k = 0; k < 9; k++)
+                    for (int k = 1; k < 10; k++)
                     {
-                        temp.Add(i);
+                        temp.Add(k);
                     }
 
                     for (int k = 0; k < 9; k++)
                     {
-                        int randomNum = rand.Next(0, temp.Count());
+                        int randomNum = temp[rand.Next(0, temp.Count())];
                         _board.InsertValue(row + i, col + j, randomNum);
                         temp.Remove(randomNum);
                     }
@@ -71,7 +72,7 @@ namespace Sudoku
             }
         }
 
-        bool FillRemaining(int i, int j)
+        private bool FillRemaining(int i, int j)
         {
             if (j >= 9 && i < 8)
             {
@@ -115,5 +116,7 @@ namespace Sudoku
             }
             return false;
         }
+
+        #endregion
     }
 }

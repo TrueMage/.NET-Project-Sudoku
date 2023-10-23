@@ -10,6 +10,9 @@ namespace Sudoku
 {
     internal class Board
     {
+        public delegate void Del();
+        public event Del onWin;
+
         private int[,] _board = new int[9, 9];
         private FillStrategy _fillStrategy;
 
@@ -30,7 +33,28 @@ namespace Sudoku
             bool result = IsValidMove(row, col, value);
 
             if(result) _board[row, col] = value;
+
             return result;
+        }
+
+        public bool IsBoardFilled()
+        {
+            int count = 0;
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (_board[i,j] != 0) count++;
+                }
+            }
+
+            if (count == 81)
+            {
+                onWin();
+                return true;
+            }
+            else return false;
         }
 
         public bool IsValidMove(int row, int col, int value)
@@ -63,7 +87,6 @@ namespace Sudoku
 
         public void DisplayBoard(int selectedRow, int selectedCol)
         {
-            Console.WriteLine("Доска судоку:");
             for (int i = 0; i < 9; i++)
             {
                 if (i % 3 == 0 && i != 0)

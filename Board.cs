@@ -75,16 +75,16 @@ namespace Sudoku
                 {
                     if (j % 3 == 0 && j != 0)
                     {
-                        Console.Write("| ");
+                        Console.Write("|");
                     }
 
                     if (i == selectedRow && j == selectedCol)
                     {
-                        Console.Write($"[{(_board[i, j] != 0 ? _board[i, j].ToString() : ".")}] ");
+                        Console.Write($"[{(_board[i, j] != 0 ?$" {_board[i, j].ToString()} " : " . ")}] ");
                     }
                     else
                     {
-                        Console.Write(_board[i, j] != 0 ? _board[i, j].ToString() : ". ");
+                        Console.Write(_board[i, j] != 0 ? $" {_board[i, j].ToString()} " : " . ");
                     }
                 }
                 Console.WriteLine();

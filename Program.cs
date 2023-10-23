@@ -7,7 +7,6 @@ namespace Sudoku
         static void Main()
         {
             #region Difficulty selector
-
             Console.WriteLine("Выберите сложность:");
             Console.WriteLine("1. Лёгкая");
             Console.WriteLine("2. Нормальная");
@@ -37,7 +36,8 @@ namespace Sudoku
             {
                 Console.Clear();
                 board.DisplayBoard(selectedRow, selectedCol);
-                Console.WriteLine("Выберите действие:");
+
+                Console.WriteLine("\nВыберите действие:");
                 Console.WriteLine("1. Выбрать клетку");
                 Console.WriteLine("2. Заполнить ячейку");
                 Console.WriteLine("3. Завершить игру");

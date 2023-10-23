@@ -1,13 +1,37 @@
-﻿namespace Sudoku
+﻿using Sudoku.Difficulties;
+
+namespace Sudoku
 {
     internal class Program
     {
         static void Main()
         {
-            Board board = new Board();
+            #region Difficulty selector
+
+            Console.WriteLine("Выберите сложность:");
+            Console.WriteLine("1. Лёгкая");
+            Console.WriteLine("2. Нормальная");
+            Console.WriteLine("3. Сложная");
+            string choice = Console.ReadLine();
+            Board board;
+
+            if (choice == "1")
+            {
+                board = new Board(new EasyDifficulty());
+            }
+            else if (choice == "2")
+            {
+                board = new Board(new NormalDifficulty());
+            }
+            else
+            {
+                board = new Board(new HardDifficulty());
+            }
 
             int selectedRow = -1;
             int selectedCol = -1;
+
+            #endregion
 
             while (true)
             {
@@ -17,7 +41,7 @@
                 Console.WriteLine("1. Выбрать клетку");
                 Console.WriteLine("2. Заполнить ячейку");
                 Console.WriteLine("3. Завершить игру");
-                string choice = Console.ReadLine();
+                choice = Console.ReadLine();
 
                 if (choice == "1")
                 {

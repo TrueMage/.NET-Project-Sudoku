@@ -1,6 +1,8 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,10 +11,24 @@ namespace Sudoku
     internal class Board
     {
         private int[,] _board = new int[9, 9];
+        private FillStrategy _fillStrategy;
+
+        public int this[int in1, int in2]
+        {
+            get { return _board[in1, in2]; }
+            set { _board[in1, in2] = value; }
+        }
+
+        public Board(FillStrategy strategy)
+        {
+            _fillStrategy = strategy;
+            strategy.Fill(this);
+        }
 
         public bool InsertValue(int row, int col, int value)
         {
             bool result = IsValidMove(row, col, value);
+
             if(result) _board[row, col] = value;
             return result;
         }
